@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { coinApi } from "../api";
+import { Helmet } from "react-helmet";
+import styled from "styled-components";
 
 interface ICoin {
   id: string;
@@ -14,7 +14,10 @@ interface ICoin {
   type: string;
 }
 
-const CoinContainer = styled.section``;
+const CoinContainer = styled.section`
+  max-width: 50rem;
+  margin: 0 auto;
+`;
 
 const Header = styled.header`
   height: 10vh;
@@ -69,18 +72,17 @@ const Coin = () => {
       .then(() => setLoading(false));
   }, []); */
 
-  const { isLoading, data } = useQuery<ICoin[]>("allCoins", () =>
-    coinApi.getCoin()
-  );
-
-  console.log(isLoading, data);
+  const { isLoading, data } = useQuery<ICoin[]>("allCoins", coinApi.getCoin);
   return (
     <CoinContainer>
-      <Header>코인</Header>
+      <Helmet>
+        <title>Coin</title>
+      </Helmet>
+      <Header>Coin</Header>
       <CoinList>
         {data && isLoading
           ? "Loading..."
-          : data?.map((coin) => (
+          : data?.slice(0, 50)?.map((coin) => (
               <CoinItem key={coin.id}>
                 <Link to={`/${coin.id}`}>
                   <Img
