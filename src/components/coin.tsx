@@ -20,11 +20,11 @@ const CoinContainer = styled.section`
 `;
 
 const Header = styled.header`
-  height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 3rem;
+  padding: 2rem;
 `;
 
 const CoinList = styled.ul`

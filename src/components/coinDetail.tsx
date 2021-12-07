@@ -79,8 +79,6 @@ const Name = styled.div`
   font-size: 3rem;
   padding: 2rem;
   color: ${(props) => props.theme.accentColor};
-  span {
-  }
 `;
 
 const OverView = styled.div`
@@ -95,6 +93,9 @@ const OverViewItem = styled.div`
   background-color: #093687;
   border-radius: 15px;
   margin: 2rem 0;
+  span {
+    color: ${(props) => "white"};
+  }
 `;
 
 const Tabs = styled.div`
@@ -108,8 +109,7 @@ const Tabs = styled.div`
 `;
 
 const Tab = styled.span<{ isActive: boolean }>`
-  color: ${(props) =>
-    props.isActive ? props.theme.accentColor : props.theme.textColor};
+  color: ${(props) => (props.isActive ? props.theme.accentColor : "white")};
 `;
 
 const CoinDetail = () => {

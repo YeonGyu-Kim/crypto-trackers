@@ -3,6 +3,8 @@ import ApexChart from "react-apexcharts";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { coinApi } from "../api";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "../atom";
 
 interface ChartProps {
   coinId: string;
@@ -25,6 +27,7 @@ const ChartContainer = styled.section`
 `;
 
 const Chart = ({ coinId }: ChartProps) => {
+  const isDark = useRecoilValue(isDarkAtom);
   const { isLoading, data } = useQuery<IHistorical[]>(
     ["ohlcv", coinId],
     () => coinApi.getCoinHistory(coinId),
@@ -62,6 +65,18 @@ const Chart = ({ coinId }: ChartProps) => {
           },
           xaxis: {
             categories: data?.map((price) => price.time_close.split("T")[0]),
+            labels: {
+              style: {
+                colors: isDark ? "white" : "black",
+              },
+            },
+          },
+          yaxis: {
+            labels: {
+              style: {
+                colors: isDark ? "white" : "black",
+              },
+            },
           },
         }}
       />
